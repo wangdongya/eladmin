@@ -1,52 +1,63 @@
+/*
+ *  Copyright 2019-2020 Zheng Jie
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *  http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package me.zhengjie.modules.system.service;
 
 import me.zhengjie.modules.system.domain.DictDetail;
-import me.zhengjie.modules.system.service.dto.DictDetailDTO;
+import me.zhengjie.modules.system.service.dto.DictDetailDto;
 import me.zhengjie.modules.system.service.dto.DictDetailQueryCriteria;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
-
+import java.util.List;
 import java.util.Map;
 
 /**
 * @author Zheng Jie
 * @date 2019-04-10
 */
-@CacheConfig(cacheNames = "dictDetail")
 public interface DictDetailService {
 
     /**
-     * findById
-     * @param id
-     * @return
+     * 创建
+     * @param resources /
      */
-    @Cacheable(key = "#p0")
-    DictDetailDTO findById(Long id);
+    void create(DictDetail resources);
 
     /**
-     * create
-     * @param resources
-     * @return
+     * 编辑
+     * @param resources /
      */
-    @CacheEvict(allEntries = true)
-    DictDetailDTO create(DictDetail resources);
-
-    /**
-     * update
-     * @param resources
-     */
-    @CacheEvict(allEntries = true)
     void update(DictDetail resources);
 
     /**
-     * delete
-     * @param id
+     * 删除
+     * @param id /
      */
-    @CacheEvict(allEntries = true)
     void delete(Long id);
 
-    @Cacheable(keyGenerator = "keyGenerator")
-    Map queryAll(DictDetailQueryCriteria criteria, Pageable pageable);
+    /**
+     * 分页查询
+     * @param criteria 条件
+     * @param pageable 分页参数
+     * @return /
+     */
+    Map<String,Object> queryAll(DictDetailQueryCriteria criteria, Pageable pageable);
+
+    /**
+     * 根据字典名称获取字典详情
+     * @param name 字典名称
+     * @return /
+     */
+    List<DictDetailDto> getDictByName(String name);
 }
