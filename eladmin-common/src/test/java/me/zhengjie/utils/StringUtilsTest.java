@@ -1,21 +1,20 @@
 package me.zhengjie.utils;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.mock.web.MockHttpServletRequest;
 
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
 
-import static me.zhengjie.utils.StringUtils.*;
-import static org.junit.Assert.*;
+import static me.zhengjie.utils.StringUtils.getIp;
+import static me.zhengjie.utils.StringUtils.getWeekDay;
+import static me.zhengjie.utils.StringUtils.toCamelCase;
+import static me.zhengjie.utils.StringUtils.toCapitalizeCamelCase;
+import static me.zhengjie.utils.StringUtils.toUnderScoreCase;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class StringUtilsTest {
-
-    @Test
-    public void testInString() {
-        assertTrue(inString("?", "?"));
-        assertFalse(inString("?", new String[]{}));
-    }
 
     @Test
     public void testToCamelCase() {
@@ -44,6 +43,6 @@ public class StringUtilsTest {
 
     @Test
     public void testGetIP() {
-        assertEquals("127.0.0.1", getIP(new MockHttpServletRequest()));
+        assertEquals("127.0.0.1", getIp(new MockHttpServletRequest()));
     }
 }
